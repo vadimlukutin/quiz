@@ -1,6 +1,6 @@
 import 'package:quiz/app/fragments/base/fragment.dart';
-import 'package:quiz/app/list_model_view_items/data_model/base.dart';
-import 'package:quiz/app/list_model_view_items/data_model/home/category.dart';
+import 'package:quiz/app/list_items/data_model/base.dart';
+import 'package:quiz/app/list_items/data_model/home/category.dart';
 
 abstract class HomeFragmentDelegate {
   onBoolPressed();
@@ -25,7 +25,7 @@ class HomeFragment
 
     result.add(
         CategoryDataItem(
-            title: "True or False Quiz screen",
+            title: "True or False Quiz",
             itemType: ItemType.boolQuiz,
             delegate: this
         )
@@ -33,7 +33,7 @@ class HomeFragment
 
     result.add(
         CategoryDataItem(
-            title: "One Answer Quiz screen",
+            title: "One Answer Quiz",
             itemType: ItemType.stringQuiz,
             delegate: this
         )
@@ -41,7 +41,7 @@ class HomeFragment
 
     result.add(
         CategoryDataItem(
-            title: "History screen",
+            title: "History",
             itemType: ItemType.history,
             delegate: this
         )

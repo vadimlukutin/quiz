@@ -1,3 +1,4 @@
+import 'package:quiz/app/extra/navigator/navigator.dart';
 import 'package:quiz/app/fragments/result/result.dart';
 import 'package:quiz/app/pages/base/base_controller.dart';
 import 'package:quiz/app/pages/result/result_presenter.dart';
@@ -12,7 +13,7 @@ class ResultController
   ResultController()
       : presenter = ResultPresenter(),
         super(){
-    title = "Home";
+    title = "Result";
     baseFragment = ResultFragment(delegate: this);
   }
 
@@ -29,15 +30,7 @@ class ResultController
     super.onDisposed();
   }
 
-  @override
-  onBoolPressed() {
-  }
-
-  @override
-  onStringPressed() {
-  }
-
-  @override
-  onHistoryPressed() {
+  void onFinishPressed () {
+    NavigationRoutes.back(context: baseContext);
   }
 }

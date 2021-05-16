@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:quiz/app/list_model_view_items/data_model/base.dart';
-import 'package:quiz/app/list_model_view_items/view/list_items/home/home_item.dart';
+import 'package:quiz/app/list_items/data_model/base.dart';
+import 'package:quiz/app/list_items/view/list_items/home/home_item.dart';
 
 enum ItemType {
   none,

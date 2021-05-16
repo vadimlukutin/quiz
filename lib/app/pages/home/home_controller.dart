@@ -1,3 +1,4 @@
+import 'package:quiz/app/extra/navigator/navigator.dart';
 import 'package:quiz/app/fragments/home/home.dart';
 import 'package:quiz/app/pages/base/base_controller.dart';
 import 'package:quiz/app/pages/home/home_presenter.dart';
@@ -31,13 +32,16 @@ class HomeController
 
   @override
   onBoolPressed() {
+    NavigationRoutes.openQuizBool(context: baseContext);
   }
 
   @override
   onStringPressed() {
+    NavigationRoutes.openQuizString(context: baseContext);
   }
 
   @override
   onHistoryPressed() {
+    NavigationRoutes.openHistory(context: baseContext);
   }
 }

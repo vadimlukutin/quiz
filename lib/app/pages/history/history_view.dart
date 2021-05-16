@@ -23,7 +23,7 @@ class _State
   _State({
     this.controller
   }) : super(controller) {
-    this.controller.context = this.context;
+    //this.controller.context = this.context;
   }
 
   @override

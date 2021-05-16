@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:quiz/app/components/list_vertical/base/base_list.dart';
-import 'package:quiz/app/list_model_view_items/data_model/base.dart';
+import 'package:quiz/app/list_items/data_model/base.dart';
 
 class Fragment {
   BaseList _listView;

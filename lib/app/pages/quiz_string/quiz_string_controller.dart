@@ -1,3 +1,4 @@
+import 'package:quiz/app/extra/navigator/navigator.dart';
 import 'package:quiz/app/fragments/quiz_string/quiz_string.dart';
 import 'package:quiz/app/pages/base/base_controller.dart';
 import 'package:quiz/app/pages/quiz_string/quiz_string_presenter.dart';
@@ -27,5 +28,9 @@ class QuizStringController
     presenter.dispose(); // don't forget to dispose of the presenter
 
     super.onDisposed();
+  }
+
+  void onNextPressed () {
+    NavigationRoutes.openResult(context: baseContext);
   }
 }

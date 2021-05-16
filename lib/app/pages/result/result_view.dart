@@ -23,7 +23,7 @@ class _State
   _State({
     this.controller
   }) : super(controller) {
-    this.controller.context = this.context;
+    //this.controller.context = this.context;
   }
 
   @override
@@ -42,9 +42,30 @@ class _State
         )
     );
 
+    final button = Container(
+      height: 80.0,
+      width: double.infinity,
+      margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+      child: ControlledWidgetBuilder<ResultController>(
+        builder: (context, controller) {
+          return ElevatedButton(
+            child: Text(
+              "Finish",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.white),
+            ),
+            onPressed: controller.onFinishPressed,
+          );
+        },
+      ),
+    );
+
     final column = Column(
       children: [
         listContainer,
+        button,
       ],
     );
 

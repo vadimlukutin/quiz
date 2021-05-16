@@ -43,9 +43,30 @@ class _State
         )
     );
 
+    final button = Container(
+      height: 80.0,
+      width: double.infinity,
+      margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+      child: ControlledWidgetBuilder<QuizBoolController>(
+        builder: (context, controller) {
+          return ElevatedButton(
+            child: Text(
+              "Next",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.white),
+            ),
+            onPressed: controller.onNextPressed,
+          );
+        },
+      ),
+    );
+
     final column = Column(
       children: [
         listContainer,
+        button,
       ],
     );
 

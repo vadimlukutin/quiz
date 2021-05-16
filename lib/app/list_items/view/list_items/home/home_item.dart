@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:quiz/app/list_model_view_items/view/list_items/base/base.dart';
+import 'package:quiz/app/list_items/view/list_items/base/base.dart';
 
 // ignore: must_be_immutable
 class HomeItem extends BaseItem {
@@ -26,7 +26,10 @@ class HomeItem extends BaseItem {
     );
 
     final rootContainer = Container(
-      child: bodyContainer,
+      child: GestureDetector(
+        child: bodyContainer,
+        onTap: this.onItemPressed,
+      ),
       margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
     );
 

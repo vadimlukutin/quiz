@@ -18,17 +18,14 @@ class NavigationRoutes {
   }
 
   static void openResult({BuildContext context}) {
-    //Navigator.pushAndRemoveUntil(
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ResultPage(title: "Result")
-        )
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => ResultPage(title: "Result")),
+      ModalRoute.withName('/'),
     );
   }
 
   static void openHistory({BuildContext context}) {
-    //Navigator.pushAndRemoveUntil(
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -38,7 +35,6 @@ class NavigationRoutes {
   }
 
   static void openQuizString({BuildContext context}) {
-    //Navigator.pushAndRemoveUntil(
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -55,5 +51,9 @@ class NavigationRoutes {
             builder: (context) => QuizBoolPage(title: "Quiz Bool")
         )
     );
+  }
+
+  static void back({BuildContext context}) {
+    Navigator.pop(context);
   }
 }
