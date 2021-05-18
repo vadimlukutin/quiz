@@ -1,165 +1,89 @@
 import 'package:quiz/app/fragments/base/fragment.dart';
 import 'package:quiz/app/list_items/data_model/base.dart';
-import 'package:quiz/app/list_items/data_model/home/category.dart';
 import 'package:quiz/app/list_items/data_model/question/question.dart';
 import 'package:quiz/app/list_items/data_model/quiz_bool/answer_bool.dart';
-import 'package:uuid/uuid.dart';
+import 'package:quiz/src/domain/entities/quiz_bool.dart';
 
 abstract class QuizBoolFragmentDelegate {
+  void successQuiz();
 }
 
 class QuizBoolFragment
     extends Fragment
     implements 
         AnswerBoolDataItemDelegate{
+  QuizBool _data;
   QuizBoolFragmentDelegate delegate;
 
   QuizBoolFragment(
       {
+        QuizBool data,
         this.delegate
       }) {
     dataList = buildDataList();
+    data = _data;
+  }
+
+  set data (QuizBool data) {
+    _data = data;
+    dataList = buildDataList();
+    update();
   }
 
   List<BaseDataItem> buildDataList() {
     var result = <BaseDataItem>[];
 
-    var uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 1,
-      question: "Question",
-      uuid: uuid,
-    ));
+    if (_data == null) {
+      return result;
+    }
 
-    result.add(
-      AnswerBoolDataItem(
-        delegate: this,
-        uuid: uuid
-      )
-    );
+    var index = 1;
 
-    uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 2,
-      question: "Question",
-      uuid: uuid,
-    ));
+    for (final item in this._data.list) {
+      result.add(
+          QuestionDataItem(
+            index: index,
+            question: item.question,
+            id: item.id,
+          )
+      );
 
-    result.add(
-        AnswerBoolDataItem(
-            delegate: this,
-            uuid: uuid
-        )
-    );
+      result.add(
+          AnswerBoolDataItem(
+              delegate: this,
+              id: item.id
+          )
+      );
 
-    uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 3,
-      question: "Question",
-      uuid: uuid,
-    ));
-
-    result.add(
-        AnswerBoolDataItem(
-            delegate: this,
-            uuid: uuid
-        )
-    );
-
-    uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 4,
-      question: "Question",
-      uuid: uuid,
-    ));
-
-    result.add(
-        AnswerBoolDataItem(
-            delegate: this,
-            uuid: uuid
-        )
-    );
-
-    uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 5,
-      question: "Question",
-      uuid: uuid,
-    ));
-
-    result.add(
-        AnswerBoolDataItem(
-            delegate: this,
-            uuid: uuid
-        )
-    );
-
-    uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 6,
-      question: "Question",
-      uuid: uuid,
-    ));
-
-    result.add(
-        AnswerBoolDataItem(
-            delegate: this,
-            uuid: uuid
-        )
-    );
-
-    uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 7,
-      question: "Question",
-      uuid: uuid,
-    ));
-
-    result.add(
-        AnswerBoolDataItem(
-            delegate: this,
-            uuid: uuid
-        )
-    );
-
-    uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 8,
-      question: "Question",
-      uuid: uuid,
-    ));
-
-    result.add(
-        AnswerBoolDataItem(
-            delegate: this,
-            uuid: uuid
-        )
-    );
-
-    uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 9,
-      question: "Question",
-      uuid: uuid,
-    ));
-
-    result.add(
-        AnswerBoolDataItem(
-            delegate: this,
-            uuid: uuid
-        )
-    );
+      index ++;
+    }
 
     return result;
   }
 
   @override
-  void onPressed({ItemType itemType}) {
+  void onAnswerBoolPressed({
+    AnswerBoolState state,
+    int id
+  }) {
+    for (final item in dataList) {
+      Type itemType = item.runtimeType;
 
-  }
+      if (itemType == AnswerBoolDataItem){
+        final state = (item as AnswerBoolDataItem).state;
 
-  @override
-  void onAnswerBoolPressed({AnswerBoolState state, String uuid}) {
+        switch (state) {
+          case AnswerBoolState.none:
+            return;
 
+          case AnswerBoolState.positive:
+          case AnswerBoolState.none:
+
+            break;
+        }
+      }
+    }
+
+    delegate.successQuiz();
   }
 }

@@ -7,11 +7,8 @@ class HistoryController
     implements HistoryFragmentDelegate
 {
 
-  final HistoryPresenter presenter;
-
   HistoryController()
-      : presenter = HistoryPresenter(),
-        super(){
+      :super(presenter: HistoryPresenter()){
     title = "History";
     baseFragment = HistoryFragment(delegate: this);
   }

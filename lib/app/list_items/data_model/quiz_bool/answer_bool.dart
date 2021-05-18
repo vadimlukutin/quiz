@@ -5,7 +5,7 @@ import 'package:quiz/app/list_items/view/list_items/quiz_bool/answer_bool.dart';
 abstract class AnswerBoolDataItemDelegate {
   void onAnswerBoolPressed({
     AnswerBoolState state,
-    String uuid
+    int id
   });
 }
 
@@ -20,7 +20,7 @@ class AnswerBoolDataItem
     implements AnswerBoolItemDelegate
 {
   final AnswerBoolDataItemDelegate delegate;
-  final String uuid;
+  final int id;
   final String positiveText = "YES";
   final String negativeText = "NO";
 
@@ -28,8 +28,12 @@ class AnswerBoolDataItem
 
   AnswerBoolDataItem({
     this.delegate,
-    this.uuid
+    this.id
   });
+
+  AnswerBoolState get state {
+    return _state;
+  }
 
   Widget getWidgetItem() {
     var itemState = ItemState.none;
@@ -72,6 +76,9 @@ class AnswerBoolDataItem
         break;
     }
 
-    delegate.onAnswerBoolPressed(uuid: uuid, state: _state);
+    delegate.onAnswerBoolPressed(
+        id: id,
+        state: _state
+    );
   }
 }

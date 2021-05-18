@@ -5,14 +5,14 @@ import 'package:quiz/app/list_items/view/list_items/question/question.dart';
 class QuestionDataItem
     extends BaseDataItem
 {
-  var uuid = "";
-  var index = 0;
-  var question = "";
+  final int id;
+  final int index;
+  final String question;
 
   QuestionDataItem({
     this.index,
     this.question,
-    this.uuid
+    this.id
   });
 
   Widget getWidgetItem() {

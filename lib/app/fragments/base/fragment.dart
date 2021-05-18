@@ -14,6 +14,12 @@ class Fragment {
     return _listView;
   }
 
+  List<BaseDataItem> buildDataList() {
+    var result = <BaseDataItem>[];
+
+    return result;
+  }
+
   void update () {
     _listView.update(fragment: this);
   }

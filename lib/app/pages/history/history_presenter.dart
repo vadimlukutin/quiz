@@ -1,6 +1,6 @@
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:quiz/app/pages/base/base_presenter.dart';
 
-class HistoryPresenter extends Presenter {
+class HistoryPresenter extends BasePresenter {
   HistoryPresenter();
 
   @override

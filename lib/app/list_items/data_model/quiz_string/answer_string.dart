@@ -5,8 +5,8 @@ import 'package:quiz/app/list_items/view/list_items/quiz_string/answer_string.da
 abstract class AnswerStringDataItemDelegate {
   void onAnswerStringPressed({
     AnswerStringState state,
-    String questionUuid,
-    String answerUuid,
+    int questionId,
+    String answer,
   });
 }
 
@@ -20,8 +20,7 @@ class AnswerStringDataItem
     implements AnswerStringItemDelegate
 {
   final AnswerStringDataItemDelegate delegate;
-  final String questionUuid;
-  final String answerUuid;
+  final int questionId;
   final String text;
 
   var _state = AnswerStringState.inactive;
@@ -31,8 +30,7 @@ class AnswerStringDataItem
   AnswerStringDataItem({
     this.delegate,
     this.text,
-    this.questionUuid,
-    this.answerUuid
+    this.questionId
   });
 
   Widget getWidgetItem() {
@@ -82,9 +80,9 @@ class AnswerStringDataItem
   @override
   void onPressed({ItemState itemState}) {
     delegate.onAnswerStringPressed(
-        questionUuid: questionUuid,
-        answerUuid: answerUuid,
-        state: _state
+        questionId: questionId,
+        state: _state,
+        answer: text
     );
   }
 }

@@ -16,7 +16,7 @@ class QuestionItem extends BaseItem {
   Widget build(BuildContext context) {
     final indexText = Text(
       "$index.",
-      textAlign: TextAlign.left,
+      textAlign: TextAlign.center,
       style: TextStyle(
           fontSize: 22,
           color: Colors.white),
@@ -32,7 +32,9 @@ class QuestionItem extends BaseItem {
 
     final row = Row(
       children: [
-        indexText,
+        FittedBox(
+            child: indexText
+        ),
         Expanded(
             child: Container(
               margin: EdgeInsets.fromLTRB(10, 0, 0, 0),

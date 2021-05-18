@@ -23,6 +23,10 @@ class BaseList extends StatefulWidget {
   void update({Fragment fragment}) {
     this._fragment = fragment;
 
+    if (_state == null) {
+      return;
+    }
+
     _state.fragment = fragment;
 
     // ignore: invalid_use_of_protected_member

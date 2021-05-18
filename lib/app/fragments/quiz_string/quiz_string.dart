@@ -3,9 +3,10 @@ import 'package:quiz/app/list_items/data_model/base.dart';
 import 'package:quiz/app/list_items/data_model/home/category.dart';
 import 'package:quiz/app/list_items/data_model/question/question.dart';
 import 'package:quiz/app/list_items/data_model/quiz_string/answer_string.dart';
-import 'package:uuid/uuid.dart';
+import 'package:quiz/src/domain/entities/quiz_string.dart';
 
 abstract class QuizStringFragmentDelegate {
+  void successQuiz();
 }
 
 class QuizStringFragment
@@ -13,217 +14,91 @@ class QuizStringFragment
     implements
         AnswerStringDataItemDelegate
 {
+  QuizString _data;
   QuizStringFragmentDelegate delegate;
 
   QuizStringFragment(
       {
+        QuizString data,
         this.delegate
       }) {
     dataList = buildDataList();
+    data = _data;
+  }
+
+  set data (QuizString data) {
+    _data = data;
+    dataList = buildDataList();
+    update();
   }
 
   List<BaseDataItem> buildDataList() {
     var result = <BaseDataItem>[];
 
-    var uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 1,
-      question: "Question",
-      uuid: uuid,
-    ));
+    if (_data == null) {
+      return result;
+    }
 
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 1",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
+    var index = 1;
 
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 2",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
+    for (final item in this._data.list) {
+      result.add(
+          QuestionDataItem(
+            index: index,
+            question: item.question,
+            id: item.id,
+          )
+      );
 
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 3",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
+      final answers = item.answers;
 
-    uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 2,
-      question: "Question",
-      uuid: uuid,
-    ));
+      for (final answer in answers) {
+        result.add(
+            AnswerStringDataItem(
+              delegate: this,
+              text: answer,
+              questionId: item.id,
+            )
+        );
+      }
 
-    result.add(
-        AnswerStringDataItem(
-            delegate: this,
-            text: "Answer 1",
-            questionUuid: uuid,
-            answerUuid: Uuid().v4(),
-        )
-    );
-
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 2",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
-
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 3",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
-
-    uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 3,
-      question: "Question",
-      uuid: uuid,
-    ));
-
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 1",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
-
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 2",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
-
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 3",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
-
-    uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 4,
-      question: "Question",
-      uuid: uuid,
-    ));
-
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 1",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
-
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 2",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
-
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 3",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
-
-    uuid = Uuid().v4();
-    result.add(QuestionDataItem(
-      index: 5,
-      question: "Question",
-      uuid: uuid,
-    ));
-
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 1",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
-
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 2",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
-
-    result.add(
-        AnswerStringDataItem(
-          delegate: this,
-          text: "Answer 3",
-          questionUuid: uuid,
-          answerUuid: Uuid().v4(),
-        )
-    );
+      index ++;
+    }
 
     return result;
   }
 
-  @override
-  void onPressed({ItemType itemType}) {
-
+  bool get isCorrect {
+    return  _data.isCorrect;
   }
 
   @override
   void onAnswerStringPressed({
     AnswerStringState state,
-    String questionUuid,
-    String answerUuid
+    int questionId,
+    String answer
   }) {
     for (var item in dataList) {
       Type itemType = item.runtimeType;
 
       if (itemType == AnswerStringDataItem){
-        final itemQuestionUuid = (item as AnswerStringDataItem).questionUuid;
-        final itemAnswerUuid = (item as AnswerStringDataItem).answerUuid;
+        final itemQuestionUuid = (item as AnswerStringDataItem).questionId;
+        final itemAnswer = (item as AnswerStringDataItem).text;
 
-        if (itemQuestionUuid == questionUuid) {
-          if (itemAnswerUuid == answerUuid) {
+        if (itemQuestionUuid == questionId) {
+          _data.setAnswer(questionId: questionId, answer: answer);
+
+          if (itemAnswer == answer) {
             (item as AnswerStringDataItem).active();
           } else {
             (item as AnswerStringDataItem).inactive();
           }
         }
       }
+    }
+
+    if (_data.filled) {
+      delegate.successQuiz();
     }
   }
 }
