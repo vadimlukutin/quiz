@@ -3,6 +3,7 @@ import 'package:quiz/app/fragments/base/fragment.dart';
 import 'package:quiz/app/list_items/data_model/base.dart';
 import 'package:quiz/app/list_items/data_model/history/history.dart';
 import 'package:quiz/app/list_items/data_model/home/category.dart';
+import 'package:quiz/src/domain/entities/quiz_history.dart';
 
 abstract class HistoryFragmentDelegate {
 }
@@ -10,6 +11,7 @@ abstract class HistoryFragmentDelegate {
 class HistoryFragment
     extends Fragment {
   HistoryFragmentDelegate delegate;
+  QuizHistoryList _data;
 
   HistoryFragment(
       {
@@ -18,50 +20,30 @@ class HistoryFragment
     dataList = buildDataList();
   }
 
+  set data (QuizHistoryList data) {
+    _data = data;
+    dataList = buildDataList();
+    update();
+  }
+
   List<BaseDataItem> buildDataList() {
     var result = <BaseDataItem>[];
 
-    result.add(
-        HistoryDataItem(
-          type: QuizType.bool,
-          total: 10,
-          correct: 3,
-          date: DateTime.now().microsecondsSinceEpoch
-        )
-    );
+    if (_data == null) {
+      return result;
+    }
 
-    result.add(
-        HistoryDataItem(
-            type: QuizType.string,
-            total: 10,
-            correct: 3,
-            date: DateTime.now().microsecondsSinceEpoch
-        )
-    );
-
-    result.add(
-        HistoryDataItem(
-            type: QuizType.bool,
-            total: 10,
-            correct: 10,
-            date: DateTime.now().microsecondsSinceEpoch
-        )
-    );
-
-    result.add(
-        HistoryDataItem(
-            type: QuizType.string,
-            total: 10,
-            correct: 10,
-            date: DateTime.now().microsecondsSinceEpoch
-        )
-    );
+    for (final item in this._data.list) {
+      result.add(
+          HistoryDataItem(
+              type: item.type,
+              total: item.total,
+              correct: item.correct,
+              date: item.date.microsecondsSinceEpoch
+          )
+      );
+    }
 
     return result;
-  }
-
-  @override
-  void onPressed({ItemType itemType}) {
-
   }
 }

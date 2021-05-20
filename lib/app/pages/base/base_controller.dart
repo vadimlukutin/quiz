@@ -24,7 +24,7 @@ class BaseController
   @override
   // this is called automatically by the parent class
   void initListeners() {
-    presenter.getOnError = (e) {
+    presenter.onError = (e) {
       print('Could not retrieve user.');
       // ScaffoldMessenger.of(getContext())
       //     .showSnackBar(SnackBar(content: Text(e.message)));

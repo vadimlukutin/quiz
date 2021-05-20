@@ -13,7 +13,7 @@ class QuizBoolController
     extends BaseController
     implements QuizBoolFragmentDelegate
 {
-  var  _state = QuizBoolControllerState.in_progress;
+  var _state = QuizBoolControllerState.in_progress;
 
   final QuizBoolPresenter presenter;
 
@@ -34,14 +34,10 @@ class QuizBoolController
     super.initListeners();
 
     presenter.getQuizOnComplete = () {
-
-      //refreshUI();
     };
 
-    presenter.getQuizOnNext = (QuizBool quiz) {
+    presenter.getQuizOnNext = (QuizBoolList quiz) {
       (baseFragment as QuizBoolFragment).data = quiz;
-
-      //refreshListView();
     };
   }
 
@@ -54,8 +50,13 @@ class QuizBoolController
 
   void onNextPressed () {
     if (_state == QuizBoolControllerState.ready) {
+      final resultDetails = (baseFragment as QuizBoolFragment).resultDetails;
+      final savedResult = (baseFragment as QuizBoolFragment).history;
+
       NavigationRoutes.openResult(
-          context: baseContext
+          context: baseContext,
+          result: resultDetails,
+          savedResult: savedResult,
       );
     }
   }

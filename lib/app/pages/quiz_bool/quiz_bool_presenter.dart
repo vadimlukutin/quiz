@@ -1,6 +1,6 @@
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:quiz/app/pages/base/base_presenter.dart';
-import 'package:quiz/src/data/repositories/api/api.dart';
+import 'package:quiz/src/data/repositories/repository.dart';
 import 'package:quiz/src/domain/usescase/get_quiz_bool_usecase.dart';
 
 class QuizBoolPresenter extends BasePresenter {
@@ -44,7 +44,7 @@ class _GetUseCaseObserver extends Observer<GetQuizBoolUseCaseResponse> {
   void onError(e) {
 //    assert(presenter.getOnError != null);
 
-    presenter.getOnError(e);
+    presenter.onError(e);
   }
 
   @override

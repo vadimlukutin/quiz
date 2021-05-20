@@ -2,6 +2,7 @@ import 'package:quiz/app/extra/navigator/navigator.dart';
 import 'package:quiz/app/fragments/home/home.dart';
 import 'package:quiz/app/pages/base/base_controller.dart';
 import 'package:quiz/app/pages/home/home_presenter.dart';
+import 'package:quiz/src/data/repositories/local_data/local_data.dart';
 
 class HomeController
     extends BaseController
@@ -10,11 +11,16 @@ class HomeController
 
   final HomePresenter presenter;
 
+  LocalDB localDb;
+
   HomeController()
       : presenter = HomePresenter(),
         super(){
     title = "Home";
     baseFragment = HomeFragment(delegate: this);
+
+    localDb = LocalDB();
+
   }
 
   @override

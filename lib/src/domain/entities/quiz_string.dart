@@ -1,3 +1,8 @@
+import 'package:encrypt/encrypt.dart';
+import 'package:quiz/src/domain/entities/base.dart';
+import 'package:quiz/src/domain/entities/quiz_detail_result.dart';
+import 'package:quiz/src/domain/entities/quiz_history.dart';
+
 class QuizStringItem {
   var _isCorrect = false;
   var id = -1;
@@ -22,17 +27,12 @@ class QuizStringItem {
   }
 }
 
-enum QuizStringStatus {
-  progress,
-  filled
-}
-
-class QuizString {
+class QuizStringList {
   var _isCorrect = false;
-  var _status = QuizStringStatus.progress;
+  var _status = QuizStatus.progress;
   var list = <QuizStringItem>[];
 
-  QuizString ({
+  QuizStringList ({
     List<dynamic> source,
   }) {
     for(final item in source) {
@@ -52,20 +52,32 @@ class QuizString {
     return _isCorrect;
   }
 
-  bool get filled {
-    return status == QuizStringStatus.filled;
+  int get correctCount {
+    var result = 0;
+
+    for (final item in list) {
+      if (!item.isCorrect) {
+        result ++;
+      }
+    }
+
+    return result;
   }
 
-  QuizStringStatus get status {
+  bool get filled {
+    return status == QuizStatus.filled;
+  }
+
+  QuizStatus get status {
     for (final item in list) {
       if (item.answer.isEmpty) {
-        _status = QuizStringStatus.progress;
+        _status = QuizStatus.progress;
 
         return _status;
       }
     }
 
-    _status = QuizStringStatus.filled;
+    _status = QuizStatus.filled;
 
     return _status;
   }
@@ -80,5 +92,35 @@ class QuizString {
     }
 
     return false;
+  }
+
+  QuizDetailResultList get resultDetails
+  {
+    var result = QuizDetailResultList();
+
+    for (final item in list) {
+      final detail = QuizDetailResultItem(
+          isCorrect: item.isCorrect,
+          question: item.question,
+          answer: item.answer
+      );
+
+      result.add(item: detail);
+    }
+
+    return result;
+  }
+
+  QuizHistoryItem get history
+  {
+    final result = QuizHistoryItem(
+      uuid: SecureRandom(16).bytes,
+      type: QuizType.string,
+      total: list.length,
+      correct: correctCount,
+      date: DateTime.now(),
+    );
+
+    return result;
   }
 }

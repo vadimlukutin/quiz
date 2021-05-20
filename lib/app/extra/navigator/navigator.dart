@@ -5,6 +5,8 @@ import 'package:quiz/app/pages/home/home_view.dart';
 import 'package:quiz/app/pages/quiz_bool/quiz_bool_view.dart';
 import 'package:quiz/app/pages/quiz_string/quiz_string_view.dart';
 import 'package:quiz/app/pages/result/result_view.dart';
+import 'package:quiz/src/domain/entities/quiz_detail_result.dart';
+import 'package:quiz/src/domain/entities/quiz_history.dart';
 
 class NavigationRoutes {
   static void openHome({BuildContext context}) {
@@ -17,10 +19,18 @@ class NavigationRoutes {
     );
   }
 
-  static void openResult({BuildContext context}) {
+  static void openResult({
+    BuildContext context,
+    QuizDetailResultList result,
+    QuizHistoryItem savedResult
+  }) {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => ResultPage(title: "Result")),
+      MaterialPageRoute(builder: (context) => ResultPage(
+          title: "Result",
+          result: result,
+        savedResult: savedResult,
+      )),
       ModalRoute.withName('/'),
     );
   }

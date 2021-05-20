@@ -9,7 +9,7 @@ class GetQuizBoolUseCase
         GetQuizBoolUseCaseParams
     >
 {
-  final QuizRepository repository;
+  final MainRepository repository;
 
   GetQuizBoolUseCase({
     this.repository
@@ -23,18 +23,18 @@ class GetQuizBoolUseCase
     final controller = StreamController<GetQuizBoolUseCaseResponse>();
 
     try {
-      // get user
+      // get quiz
       final quiz = await repository.getQuizBool();
 
       // Adding it triggers the .onNext() in the `Observer`
       // It is usually better to wrap the reponse inside a respose object.
       controller.add(GetQuizBoolUseCaseResponse(quiz: quiz));
 
-      logger.finest('GetUserUseCase successful.');
+      logger.finest('GetQuizBoolUseCase successful.');
 
       controller.close();
     } catch (e) {
-      logger.severe('GetUserUseCase unsuccessful.');
+      logger.severe('GetQuizBoolUseCase unsuccessful.');
 
       // Trigger .onError
 
@@ -52,7 +52,7 @@ class GetQuizBoolUseCaseParams {
 
 /// Wrapping response inside an object makes it easier to change later
 class GetQuizBoolUseCaseResponse {
-  final QuizBool quiz;
+  final QuizBoolList quiz;
 
   GetQuizBoolUseCaseResponse({
     this.quiz

@@ -37,7 +37,7 @@ class QuizStringController
       //refreshUI();
     };
 
-    presenter.getQuizOnNext = (QuizString quiz) {
+    presenter.getQuizOnNext = (QuizStringList quiz) {
       (baseFragment as QuizStringFragment).data = quiz;
     };
   }
@@ -51,7 +51,14 @@ class QuizStringController
 
   void onNextPressed () {
     if (_state == QuizStringControllerState.ready) {
-      NavigationRoutes.openResult(context: baseContext);
+      final resultDetails = (baseFragment as QuizStringFragment).resultDetails;
+      final savedResult = (baseFragment as QuizStringFragment).history;
+
+      NavigationRoutes.openResult(
+          context: baseContext,
+          result: resultDetails,
+          savedResult: savedResult,
+      );
     }
   }
 

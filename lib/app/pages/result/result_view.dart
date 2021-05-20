@@ -3,15 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:quiz/app/components/app_bar/base.dart';
 import 'package:quiz/app/pages/result/result_controller.dart';
+import 'package:quiz/src/domain/entities/quiz_detail_result.dart';
+import 'package:quiz/src/domain/entities/quiz_history.dart';
 
 class ResultPage extends View {
-  ResultPage({Key key, this.title}) : super(key: key);
+  final QuizDetailResultList result;
+  final QuizHistoryItem savedResult;
+
+  ResultPage({
+    Key key,
+    this.title,
+    this.result,
+    this.savedResult
+  }) : super(key: key);
 
   final String title;
 
   @override
   _State createState(){
-    return _State(controller: ResultController());
+    return _State(controller: ResultController(
+        result: this.result,
+        savedResult: savedResult
+    ));
   }
 }
 

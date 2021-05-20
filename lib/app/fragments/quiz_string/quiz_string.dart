@@ -1,8 +1,9 @@
 import 'package:quiz/app/fragments/base/fragment.dart';
 import 'package:quiz/app/list_items/data_model/base.dart';
-import 'package:quiz/app/list_items/data_model/home/category.dart';
 import 'package:quiz/app/list_items/data_model/question/question.dart';
 import 'package:quiz/app/list_items/data_model/quiz_string/answer_string.dart';
+import 'package:quiz/src/domain/entities/quiz_detail_result.dart';
+import 'package:quiz/src/domain/entities/quiz_history.dart';
 import 'package:quiz/src/domain/entities/quiz_string.dart';
 
 abstract class QuizStringFragmentDelegate {
@@ -14,22 +15,30 @@ class QuizStringFragment
     implements
         AnswerStringDataItemDelegate
 {
-  QuizString _data;
+  QuizStringList _data;
   QuizStringFragmentDelegate delegate;
 
   QuizStringFragment(
       {
-        QuizString data,
+        QuizStringList data,
         this.delegate
       }) {
     dataList = buildDataList();
     data = _data;
   }
 
-  set data (QuizString data) {
+  set data (QuizStringList data) {
     _data = data;
     dataList = buildDataList();
     update();
+  }
+
+  QuizDetailResultList get resultDetails {
+    return _data.resultDetails;
+  }
+
+  QuizHistoryItem get history {
+    return _data.history;
   }
 
   List<BaseDataItem> buildDataList() {

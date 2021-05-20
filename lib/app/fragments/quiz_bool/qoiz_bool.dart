@@ -3,6 +3,8 @@ import 'package:quiz/app/list_items/data_model/base.dart';
 import 'package:quiz/app/list_items/data_model/question/question.dart';
 import 'package:quiz/app/list_items/data_model/quiz_bool/answer_bool.dart';
 import 'package:quiz/src/domain/entities/quiz_bool.dart';
+import 'package:quiz/src/domain/entities/quiz_detail_result.dart';
+import 'package:quiz/src/domain/entities/quiz_history.dart';
 
 abstract class QuizBoolFragmentDelegate {
   void successQuiz();
@@ -12,22 +14,30 @@ class QuizBoolFragment
     extends Fragment
     implements 
         AnswerBoolDataItemDelegate{
-  QuizBool _data;
+  QuizBoolList _data;
   QuizBoolFragmentDelegate delegate;
 
   QuizBoolFragment(
       {
-        QuizBool data,
+        QuizBoolList data,
         this.delegate
       }) {
     dataList = buildDataList();
     data = _data;
   }
 
-  set data (QuizBool data) {
+  set data (QuizBoolList data) {
     _data = data;
     dataList = buildDataList();
     update();
+  }
+
+  QuizDetailResultList get resultDetails {
+    return _data.resultDetails;
+  }
+
+  QuizHistoryItem get history {
+    return _data.history;
   }
 
   List<BaseDataItem> buildDataList() {
@@ -71,14 +81,25 @@ class QuizBoolFragment
 
       if (itemType == AnswerBoolDataItem){
         final state = (item as AnswerBoolDataItem).state;
+        final questionId = (item as AnswerBoolDataItem).id;
 
         switch (state) {
           case AnswerBoolState.none:
+
             return;
 
           case AnswerBoolState.positive:
-          case AnswerBoolState.none:
+            _data.setAnswer(
+                questionId: questionId,
+                answer: true
+            );
+            break;
 
+          case AnswerBoolState.negative:
+            _data.setAnswer(
+                questionId: questionId,
+                answer: false
+            );
             break;
         }
       }
