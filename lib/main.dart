@@ -15,10 +15,14 @@ void main() {
     ],
     title: 'Quiz',
     theme: ThemeData(
-      // brightness: Brightness.dark,
-        unselectedWidgetColor: Colors.white,
+        brightness: Brightness.light,
         primaryColor: Colors.blue
     ),
+    darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.blueGrey
+    ),
+    themeMode: ThemeMode.system,
     home: HomePage(),
   );
 

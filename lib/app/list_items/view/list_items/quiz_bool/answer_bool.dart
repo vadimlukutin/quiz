@@ -48,7 +48,7 @@ class AnswerBoolItem extends BaseItem {
     );
 
     final bodyContainer = Container(
-      color: Colors.blue,
+      color: Theme.of(context).primaryColor,
       //padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
       child: row,
     );

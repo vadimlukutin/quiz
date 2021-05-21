@@ -9,7 +9,9 @@ import 'package:quiz/src/domain/entities/quiz_detail_result.dart';
 import 'package:quiz/src/domain/entities/quiz_history.dart';
 
 class NavigationRoutes {
-  static void openHome({BuildContext context}) {
+  static void openHome({
+    BuildContext context
+  }) {
     //Navigator.pushAndRemoveUntil(
     Navigator.push(
         context,
@@ -27,15 +29,17 @@ class NavigationRoutes {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => ResultPage(
-          title: "Result",
-          result: result,
+        title: "Result",
+        result: result,
         savedResult: savedResult,
       )),
       ModalRoute.withName('/'),
     );
   }
 
-  static void openHistory({BuildContext context}) {
+  static void openHistory({
+    BuildContext context
+  }) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -44,7 +48,9 @@ class NavigationRoutes {
     );
   }
 
-  static void openQuizString({BuildContext context}) {
+  static void openQuizString({
+    BuildContext context
+  }) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -53,7 +59,9 @@ class NavigationRoutes {
     );
   }
 
-  static void openQuizBool({BuildContext context}) {
+  static void openQuizBool({
+    BuildContext context
+  }) {
     //Navigator.pushAndRemoveUntil(
     Navigator.push(
         context,

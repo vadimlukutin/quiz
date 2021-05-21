@@ -25,11 +25,11 @@ class HistoryDataItem
   }){
     switch (type) {
       case QuizType.bool:
-        _quizTypeText = _stringQuiz;
+        _quizTypeText = _boolQuiz;
         break;
 
       case QuizType.string:
-        _quizTypeText = _boolQuiz;
+        _quizTypeText = _stringQuiz;
         break;
     }
   }

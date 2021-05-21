@@ -56,7 +56,7 @@ class _State
 
     final columnContainer = Container(
       child: safeArea,
-      color: Colors.white,
+      //color: Colors.white,
     );
 
     final appBar = BaseAppBar(textTitle: controller.title);

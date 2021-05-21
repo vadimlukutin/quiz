@@ -62,6 +62,10 @@ class QuizStringController
     }
   }
 
+  QuizStringControllerState get state {
+    return _state;
+  }
+
   @override
   void successQuiz() {
     _state = QuizStringControllerState.ready;

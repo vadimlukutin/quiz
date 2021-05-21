@@ -14,14 +14,15 @@ class HomeItem extends BaseItem {
   @override
   Widget build(BuildContext context) {
     final bodyContainer = Container(
-      color: Colors.blue,
-      padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+      color: Theme.of(context).primaryColor,
+      padding: EdgeInsets.fromLTRB(15, 35, 15, 35),
       child: Text(
         title,
         textAlign: TextAlign.left,
         style: TextStyle(
             fontSize: 22,
-            color: Colors.white),
+            color: Colors.white
+        ),
       ),
     );
 
@@ -30,7 +31,7 @@ class HomeItem extends BaseItem {
         child: bodyContainer,
         onTap: this.onItemPressed,
       ),
-      margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+      margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
     );
 
     return rootContainer;

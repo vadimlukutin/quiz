@@ -55,7 +55,7 @@ class _State extends ViewState<HomePage, HomeController> {
 
     final columnContainer = Container(
       child: safeArea,
-      color: Colors.white,
+      //color: Colors.white,
     );
 
     final appBar = BaseAppBar(textTitle: controller.title);

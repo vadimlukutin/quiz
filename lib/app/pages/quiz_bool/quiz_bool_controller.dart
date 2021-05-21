@@ -61,6 +61,10 @@ class QuizBoolController
     }
   }
 
+  QuizBoolControllerState get state {
+    return _state;
+  }
+
   @override
   void successQuiz() {
     _state = QuizBoolControllerState.ready;

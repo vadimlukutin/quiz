@@ -1,10 +1,17 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:flutter_device_type/flutter_device_type.dart';
 import 'package:quiz/app/fragments/base/fragment.dart';
 import 'package:quiz/app/pages/base/base_presenter.dart';
 
 abstract class FilterDelegate {
   void onFilterPressed();
+}
+
+enum DeviceType {
+  none,
+  ios,
+  android
 }
 
 class BaseController
@@ -57,7 +64,15 @@ class BaseController
     baseContext = context;
   }
 
-  // BaseList get listView{
-  //   return baseFragment.listView;
-  // }
+  DeviceType get device {
+    if (Device.get().isIos) {
+      return DeviceType.ios;
+    }
+
+    if (Device.get().isAndroid) {
+      return DeviceType.android;
+    }
+
+    return DeviceType.none;
+  }
 }

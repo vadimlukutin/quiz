@@ -56,7 +56,7 @@ class QuizStringList {
     var result = 0;
 
     for (final item in list) {
-      if (!item.isCorrect) {
+      if (item.isCorrect) {
         result ++;
       }
     }

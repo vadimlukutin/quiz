@@ -62,6 +62,9 @@ class _State
       child: ControlledWidgetBuilder<ResultController>(
         builder: (context, controller) {
           return ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor:  MaterialStateProperty.all<Color>(Theme.of(context).primaryColor)
+            ),
             child: Text(
               "Finish",
               textAlign: TextAlign.left,
@@ -90,7 +93,7 @@ class _State
 
     final columnContainer = Container(
       child: safeArea,
-      color: Colors.white,
+      //color: Colors.white,
     );
 
     final appBar = BaseAppBar(textTitle: controller.title);

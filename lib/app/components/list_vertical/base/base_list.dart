@@ -7,7 +7,9 @@ class BaseList extends StatefulWidget {
   Fragment _fragment;
   ListView _listView;
 
-  BaseList({Fragment fragment}) {
+  BaseList({
+    Fragment fragment
+  }) {
     _fragment = fragment;
   }
 

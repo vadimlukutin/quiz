@@ -8,13 +8,13 @@ class BaseAppBar
   BaseAppBar({
     this.textTitle
   }) : super(
-    backgroundColor: Colors.blue,
+    //backgroundColor: Colors.blue,
     title: Text(
         textTitle,
         textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: 20,
-            color: Colors.white
+            //color: Colors.white
         )
     ),
   );
