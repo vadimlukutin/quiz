@@ -1,5 +1,3 @@
-
-
 enum QuizStatus {
   progress,
   filled

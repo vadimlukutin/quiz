@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:path/path.dart';
 import 'package:quiz/app/components/alerts/alert.dart';
 import 'package:quiz/app/components/app_bar/base.dart';
 import 'package:quiz/app/pages/base/base_controller.dart';

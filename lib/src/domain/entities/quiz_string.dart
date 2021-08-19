@@ -14,10 +14,10 @@ class QuizStringItem {
   QuizStringItem({
     Map<String, dynamic> source
   }){
-    id = source["id"] as int ?? -1;
-    question = source["question"] as String ?? "";
+    id          = source["id"] as int ?? -1;
+    question    = source["question"] as String ?? "";
     rightAnswer = source["rightAnswer"] as String ?? "";
-    answers = source["answers"] as List<dynamic> ?? [];
+    answers     = source["answers"] as List<dynamic> ?? [];
   }
 
   bool get isCorrect {
